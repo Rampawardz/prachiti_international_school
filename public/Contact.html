@@ -141,13 +141,14 @@
         /* margin-left: 100px; */
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 800px) {
         body {
             padding: 2rem;
         }
 
       #box {
         justify-content: space-between;
+        width: 90%;
       }
       div {
         display: flex;
@@ -158,6 +159,12 @@
         margin: 0;
         padding: 0;
       }
+    }
+
+    @media (max-width: 450px) {
+        #box{
+            width: 95%;
+        } 
     }
 
     @media (max-width: 300px) {
