@@ -4,15 +4,15 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config(); // Ensure environment variables are loaded
+require("dotenv").config(); // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors()); // Enable CORS
-app.use(bodyParser.json()); // Parse JSON payloads
-app.use(express.static(path.join(__dirname, "public"))); // Serve static frontend files
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public"))); // Serve frontend
 
 // MongoDB Connection
 mongoose
@@ -20,13 +20,13 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connected to MongoDB"))
+  .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1); // Exit if MongoDB connection fails
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1);
   });
 
-// Schema and Model for Messages
+// Message Schema
 const messageSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -36,59 +36,57 @@ const messageSchema = new mongoose.Schema({
 });
 const Message = mongoose.model("Message", messageSchema);
 
-// Nodemailer Configuration
+// Email Transporter (Gmail)
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER, // Ensure this is set in your .env file
-    pass: process.env.EMAIL_PASS, // Ensure this is set in your .env file
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
-// Routes
+// API Route
 app.post("/send", async (req, res) => {
   const { name, email, contact, message } = req.body;
 
-  // Validate request payload
   if (!name || !email || !contact || !message) {
     return res.status(400).send("All fields are required.");
   }
 
   try {
-    // Save message to MongoDB
+    // Save message
     const newMessage = new Message({ name, email, contact, message });
     await newMessage.save();
-    console.log("Message saved to database.");
+    console.log("📥 Message saved to database.");
 
-    // Email options
+    // Send email
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-      subject: `New Contact Form Message from ${name} (${contact})`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      subject: `New Message from ${name} (${contact})`,
+      text: `Name: ${name}\nEmail: ${email}\nContact: ${contact}\n\nMessage:\n${message}`,
     };
 
-    // Send email
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.error("Error sending email:", error);
+        console.error("❌ Error sending email:", error);
         return res.status(500).send("Failed to send email.");
       }
-      console.log("Email sent:", info.response);
+      console.log("📧 Email sent:", info.response);
       return res.status(200).send("Email sent successfully!");
     });
   } catch (err) {
-    console.error("Error saving or sending message:", err);
-    return res.status(500).send("An error occurred while processing your request.");
+    console.error("❌ Error:", err);
+    res.status(500).send("Server error.");
   }
 });
 
-// Catch-All Route for Frontend
+// Serve frontend for all other routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Start the server
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
