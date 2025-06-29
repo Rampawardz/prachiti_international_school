@@ -78,41 +78,49 @@ window.onresize = function () {
 
 
  // Contact Form Submission
-document.getElementById('contactForm').addEventListener('submit', async function(event) {
+document.getElementById('contactForm').addEventListener('submit', async function (event) {
     event.preventDefault();
-    
+
+    const name = document.getElementById('name').value.trim();
     const emailInput = document.getElementById('email');
+    const email = emailInput.value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const message = document.getElementById('message').value.trim();
     const emailError = document.getElementById('emailError');
-    
+
+    // Validate required fields
+    if (!name || !email || !message) {
+        alert("Please fill in all required fields (Name, Email, Message).");
+        return;
+    }
+
     // Validate email format
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
         emailInput.classList.add('invalid');
         emailError.textContent = 'Email is invalid.';
+        return;
     } else {
         emailInput.classList.remove('invalid');
         emailError.textContent = '';
-
-        const name = document.getElementById('name').value;
-        const email = emailInput.value;
-        const contact = document.getElementById('contact').value;
-        const message = document.getElementById('message').value;
-
-        try {
-            const response = await fetch("/send", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, contact, message }),
-            });
-
-            if (response.ok) {
-                alert(`Thank you for contacting us, ${name}!\nWe will get back to you soon.`);
-            } else {
-                alert("Failed to send message.");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred.");
-        }
     }
-    document.getElementById('contactForm').reset();
+
+    try {
+        const response = await fetch("/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, contact, message }),
+        });
+
+        if (response.ok) {
+            alert(`Thank you for contacting us, ${name}!\nWe will get back to you soon.`);
+            document.getElementById("contactForm").reset();
+        } else {
+            const errorText = await response.text();
+            alert("Failed to send message: " + errorText);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while sending your message.");
+    }
 });
