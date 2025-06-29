@@ -21,13 +21,19 @@
       padding-top: 40px;
     }
 
+    #box {
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+    }
     form#contactForm {
       background: #ffffff;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 30px;
+      max-width: 700px;
       width: 100%;
-      max-width: 500px;
+      margin-right: auto;
     }
 
     h2 {
@@ -118,6 +124,23 @@
       border-color: red;
     }
 
+    #Address{
+        /* border: 1px solid black; */
+        width: 40rem;
+        background-color: #fff;
+        border-radius: 5px;
+        height: min-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: left;
+        padding: 2rem;
+        /* padding-left: 2rem; */
+          box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        line-height: 0.6rem;
+        margin-left: 100px;
+    }
+
     @media (max-width: 500px) {
       .btn-group {
         flex-direction: column;
@@ -127,7 +150,8 @@
 </head>
 <body>
 
-  <form id="contactForm">
+  <div id="box">
+    <form id="contactForm">
     <h2>Contact Us</h2>
 
     <div class="form-group">
@@ -156,6 +180,14 @@
       <button type="reset" class="clear">Clear</button>
     </div>
   </form>
+   <div id="Address">
+    <h2>Address:</h2>
+    <h3>Prachiti International School</h3>
+    <p>Kawathe, Tal. Sakri, Dist. Dhule - 424304</p>
+    <p>Mobile No.: 7387738765, 9503000754</p>
+    <p type="email">Email: prachitischool@gmail.com</p>
+   </div>
+  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
