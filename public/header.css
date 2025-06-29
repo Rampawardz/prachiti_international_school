@@ -1,0 +1,214 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Josefin Sans", serif;
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+i {
+    font-size: 15px;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    /* display: flex; */
+    /* justify-content: space-around; */
+    background-color: rgba(234, 183, 72);
+    box-shadow: 0px 4px 8px black;
+}
+
+header a {
+    color: #551A8B;
+}
+
+#logo {
+    height: 6em;
+}
+
+#rheader {
+    display: flex;
+    width: 20%;
+    margin-left: 3%;
+}
+
+#rheader a {
+    font-size: 35px;
+    font-weight: 950;
+    margin-top: 26px;
+    text-decoration: none;
+    color: #551A8B;
+}
+
+#rheader a span {
+    font-size: 19px;
+    font-weight: 400;
+}
+
+#lheader {
+    display: flex;
+    justify-content: space-around;
+    width: 67%;
+    margin: auto;
+    overflow: hidden;
+}
+
+#lheader button {
+    border: none;
+    background-color: #d8dbe2;
+    outline: none;
+    font-size: 25px;
+    height: 0;
+    color: #551A8B;
+}
+
+#lheader a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #551A8B;
+}
+
+#lheader li a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1300px) {
+
+    #lheader a,
+    #lheader button {
+        font-size: 20px;
+    }
+
+    #header {
+        justify-content: space-between;
+    }
+
+    #rheader {
+        margin-left: 0;
+    }
+}
+
+#about {
+    height: 100px;
+    width: 200px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 4em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0px 8px 16px 0px black;
+    display: none;
+    z-index: 1;
+}
+
+#about li {
+    margin: 8px;
+    list-style: none;
+}
+
+#about a {
+    font-size: 20px;
+
+}
+
+#au {
+    height: 40px;
+}
+
+#au:hover #about {
+    display: block;
+    background-color: white;
+}
+
+#abtn:hover {
+    cursor: pointer;
+}
+
+#about li :hover {
+    background-color: rgba(0, 0, 0, 0.056);
+}
+
+#fclt {
+    height: 230px;
+    width: 180px;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    top: 4em;
+    box-shadow: 0px 8px 16px 0px black;
+    display: none;
+    z-index: 1;
+}
+
+#fclt a {
+    font-size: 20px;
+}
+
+#fclt li {
+    margin: 8px;
+    list-style: none;
+}
+
+#faci {
+    height: 40px;
+}
+
+#faci:hover #fclt {
+    display: block;
+}
+
+#fclt li :hover {
+    background-color: rgba(0, 0, 0, 0.056);
+}
+
+#fbtn:hover {
+    cursor: pointer;
+}
+
+#gl {
+    height: 100px;
+    width: 180px;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    top: 4em;
+    box-shadow: 0px 8px 16px 0px black;
+    display: none;
+    z-index: 1;
+}
+
+#gl li :hover {
+    background-color: rgba(0, 0, 0, 0.056);
+}
+
+#gl li {
+    margin: 8px;
+    list-style: none;
+}
+
+#gl a {
+    font-size: 20px;
+}
+
+#gal {
+    height: 40px;
+}
+
+#gal:hover #gl {
+    display: block;
+}
+
+#gbtn {
+    cursor: pointer;
+}

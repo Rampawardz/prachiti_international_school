@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.heading {
+    height: 20rem;
+    width: auto;
+    margin: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+
+}
+.heading p{
+    max-width: 80%;
+    font-size: 26px;
+    font-weight: bolder;
+    text-align: center;
+    color: hwb(217 44% 14% / 0.925);
+}
+
+.banner{
+    height: 40rem;
+    width: 100%;
+    margin: auto;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    background-image: url(sports5.png);
+    background-size: cover;
+    margin-top: 6em;
+}
+
+.banner h1 {
+    height: fit-content;
+    font-weight: bolder;
+    font-size: 120px;
+    color: hwb(219 16% 51%);
+    border: 3px solid white;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+#one{
+    height: 20rem;
+    width: 30%;
+    background-size:cover;
+    box-shadow:1px 5px 8px hsla(0, 0%, 58%, 0.623);
+    border-radius: 25px;
+}
+
+/* #one-1{
+    height: 20rem;
+    width: 30%;
+    background-image: url('sports4.jpg');
+    background-size:100%;
+    box-shadow:1px 5px 8px hsla(0, 0%, 58%, 0.623);
+    border-radius: 25px;
+
+} */
+
+#two {
+    height: auto;
+    width: 45%;
+    box-shadow:1px 5px 8px hsla(0, 0%, 58%, 0.623);
+    margin: 50px;
+    padding: 40px;
+    /* margin-left: auto; */
+    background-color: #fff;
+    font-size: 24px;
+}
